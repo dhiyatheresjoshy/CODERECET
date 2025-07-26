@@ -21,9 +21,9 @@ export default function Index() {
             <Link to="/login" className="text-cyber-text hover:text-cyber-blue transition-colors">
               Log in
             </Link>
-            <Button className="bg-gradient-to-r from-cyber-blue to-cyber-electric text-white hover:shadow-lg hover:shadow-cyber-glow-blue transition-all px-6 py-2 rounded-lg border border-cyber-blue/30">
-              Sign Up.
-            </Button>
+            <Link to="/SignUp" className="bg-gradient-to-r from-cyber-blue to-cyber-electric text-white hover:shadow-lg hover:shadow-cyber-glow-blue transition-all px-6 py-2 rounded-lg border border-cyber-blue/30">
+              Sign Up
+            </Link>
           </div>
         </div>
       </nav>
