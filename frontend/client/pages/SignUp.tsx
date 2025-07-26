@@ -27,13 +27,41 @@ export default function SignUp() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Implement sign up logic
-    console.log('Sign up data:', formData);
-    // Redirect to dashboard after successful signup
-    navigate('/dashboard');
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (formData.password !== formData.confirmPassword) {
+    alert("Passwords do not match");
+    return;
+  }
+
+  try {
+    const response = await fetch('http://localhost:5000/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await response.json();
+    console.log(result);
+
+    if (response.ok) {
+      // ✅ Save UID to localStorage
+      localStorage.setItem("uid", result.uid);
+
+      // ✅ Navigate only after storing UID
+      navigate('/dashboard');
+    } else {
+      alert(result.message || 'Signup failed');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Server error. Please try again later.');
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-cyber-dark">
